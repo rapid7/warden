@@ -1,7 +1,7 @@
 # HTTP API #
 
 The main interface to warden is a HTTP API. The API can be used to retrieve
- vault tokens to authorized nodes. The endpoints are versioned to enable
+vault tokens to authorized nodes. The endpoints are versioned to enable
 changes without breaking backwards compatibility.
 
 Each endpoint manages a different aspect of propsd:
@@ -41,22 +41,14 @@ fail status.
 ## Authenticate ##
 
 The authenticate endpoint provides a way for servers to authenticate and receive
-a token from vault. The endpoint responds to GET requests that contain metadata
+a token from vault. The endpoint responds to POST requests that contain metadata
 about the server and a signed  with either a 200 (OK) response and token from
-vault, or a 403 (Forbidden) response code.
+vault, or a 403 (Forbidden) response code with a header of POST.
 
 ### /v1/authenticate ###
 
-An example response from the Conqueso API is:
-
-~~~text
-aws.metrics.enabled=false
-fitness.value=88.33
-web.url.private=http://localhost:2600/
-conqueso.frontend.ips=10.0.0.1,10.0.0.2
-~~~
-
-GET requests return a vault token and a 200 (OK) response code, or a 403 response
+POST requests return a vault token and a 200 (OK) response code, or a 403 response
 code when the data sent is not enough to authenticate.
 
-Any other type of request returns a 405 (Method Not Allowed) response code.
+Any other type of request returns a 405 (Method Not Allowed) response code with
+a header of `Allow: POST` header.
