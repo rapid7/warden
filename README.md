@@ -2,9 +2,9 @@
 
 ## Description
 
-TODO
+Warden is a microservice which runs on each node of a vault cluster. It allows [propsd][] to authenticate with vault in a secure manner.
 
-The warden server runs under [Node.js][].
+Warden runs on [Node.js][].
 
 ## Usage
 
@@ -17,3 +17,4 @@ TODO
 
 
 [Node.js]: https://nodejs.org/en/
+[propsd]: https://github.com/rapid7/propsd
