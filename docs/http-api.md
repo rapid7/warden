@@ -45,21 +45,16 @@ a token from vault. The endpoint responds to POST requests that contain metadata
 about the server and a signed  with either a 200 (OK) response and token from
 vault, or a 403 (Forbidden) response code with a header of POST.
 
-Example token of a successful request. It should look exactly like a response
-directly from vault
-```js
-{ lease_id: '',
-  renewable: false,
-  lease_duration: 0,
-  data: null,
-  warnings: null,
-  auth:
-   { client_token: '9fcc202c-366b-9614-50a6-25ad4f78691d',
-     accessor: '1bf0a7cb-7400-298d-d39b-3f1a9946fdea',
-     policies: [ 'root' ],
-     metadata: null,
-     lease_duration: 60,
-     renewable: true } }
+Example token of a successful request. It should look exactly like a secret from
+vault
+```json
+{
+  "lease_duration": 300,
+  "renewable": true,
+  "data": {
+    "token": "f45cf71b-1806-7c51-8b5b-c3018177ed8c"
+  }
+}
 ```
 
 ### /v1/authenticate ###
