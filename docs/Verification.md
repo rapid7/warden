@@ -1,6 +1,7 @@
 # Verification #
 
-The criteria checked to ensure the server making the request should receive a token.
+The data sent in the request is verified to ensure that the server making the
+request should receive a token.
 
 ## Methods ##
 * `verifySignature(signature)`
