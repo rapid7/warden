@@ -7,8 +7,8 @@ The criteria checked to ensure the server making the request should receive a to
   * Immediately verify the signature is valid.
 
 
-* `verifyData(object)`
-  * Next, the data sent with the request will be checked against the criteria,
+* `verifyData(object, version)`
+  * Next, the data sent with the request will be checked against the criteria
   set by warden's admin, to decide if a token should be returned.
     * Pass: response code of 200 (ok)
     * Fail: response code of 403 (Forbidden)
