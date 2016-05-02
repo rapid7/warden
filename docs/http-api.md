@@ -4,14 +4,14 @@ The main interface to warden is a HTTP API. The API can be used to retrieve
 vault tokens to authorized nodes. The endpoints are versioned to enable
 changes without breaking backwards compatibility.
 
-Each endpoint manages a different aspect of propsd:
+Each endpoint manages a different aspect of warden:
 
 * health - Basic health check
 * authenticate - Authenticates with vault to retrieve a token
 
 ## Health ##
 
-The health endpoint is used to validate propsd is running. The endpoint responds
+The health endpoint is used to validate warden is running. The endpoint responds
 to GET requests with a JSON body and a response code. Any other type of
 request returns a 405 (Method Not Allowed) response code and includes an
 `Allow: GET` header.
@@ -27,16 +27,11 @@ An example response from the health API is:
 }
 ~~~
 
-The status field is a string with one of the following values: "okay",
-or "fail". The okay status means that warden is available. The fail
-status means that warden is not available.
+The status field is a string "okay". Anything besides a 200 or 405 response code
+means that warden is not available.
 
 The uptime field is an integer representing the number of milliseconds warden
 has been running.
-
-Response codes are compatible with Consul HTTP health checks. A 200 (OK) is
-returned with an okay status. A 500 (Internal Server Error) is returned with a
-fail status.
 
 ## Authenticate ##
 
