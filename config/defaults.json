@@ -1,0 +1,13 @@
+{
+  "vault": {
+    "port": 8200,
+    "hostname": "127.0.0.1"
+  },
+  "service": {
+    "port": 8080,
+    "hostname": "localhost"
+  },
+  "log": {
+    "level": "info"
+  }
+}
