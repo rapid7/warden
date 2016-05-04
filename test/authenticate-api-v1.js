@@ -59,7 +59,7 @@ describe('Authenticate API v1', () => {
       .end(done);
   });
 
-  it('responds correctly to a request to the /authenticate endpoint', (done) => {
+  it('responds correctly to a request to the /v1/authenticate endpoint', (done) => {
     request(server)
       .post('/v1/authenticate')
       .set('Accept', 'application/json')
