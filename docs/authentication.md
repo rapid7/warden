@@ -33,6 +33,7 @@ request should receive a token.
 
 * `getToken(ttl maybe)`
   * Get a token from vault for response if request is successful
+    * if the TTL is provided, it will use that, otherwise it will default to a specific number.
 
 
 * `respond(responseCode, token)`
