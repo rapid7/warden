@@ -40,6 +40,8 @@ app.use(expressWinston.logger({
   baseMeta: {source: 'request', type: 'request'}
 }));
 
+app.use(require('body-parser').json());
+
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
 require('../lib/control/v1/authenticate').attach(app);
