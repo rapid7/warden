@@ -64,8 +64,6 @@ describe('Authenticate API v1', () => {
       .end(done);
   });
 
-  //{document: 'sgsdfgds', signiture: '-----BEGIN PKC-----'}
-
   it('responds with the correct error for a request without a document', (done) => {
     request(server)
       .post('/v1/authenticate')
