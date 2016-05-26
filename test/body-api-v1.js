@@ -8,7 +8,6 @@ require('should');
 const testServerPort = 3000;
 const HTTP_OK = 200;
 const HTTP_BAD_REQUEST = 400;
-const HTTP_METHOD_NOT_ALLOWED = 405;
 
 /**
  * Create a new Express server for testing
