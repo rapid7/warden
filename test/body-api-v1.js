@@ -24,7 +24,7 @@ const makeServer = () => {
   return app.listen(testServerPort);
 };
 
-describe('Authenticate API v1', () => {
+describe('Validate the body of the request v1', () => {
   let server = null;
 
   beforeEach(() => {
@@ -35,47 +35,66 @@ describe('Authenticate API v1', () => {
     server.close(done);
   });
 
-  it('acknowledges POST requests to the /v1/authenticate endpoint', (done) => {
+  it('responds with the correct error for a request without a document', (done) => {
     request(server)
       .post('/v1/authenticate')
-      .type('json')
       .set('Accept', 'application/json')
-      .send(Real_string)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect(HTTP_OK)
-      .end(done);
-  });
-
-  it('rejects all other request types to the /v1/authenticate endpoint', (done) => {
-    request(server)
-      .delete('/v1/authenticate')
-      .expect('Allow', 'POST')
-      .expect(HTTP_METHOD_NOT_ALLOWED);
-
-    request(server)
-      .put('/v1/authenticate')
-      .expect('Allow', 'POST')
-      .expect(HTTP_METHOD_NOT_ALLOWED);
-
-    request(server)
-      .get('/v1/authenticate')
-      .expect('Allow', 'POST')
-      .expect(HTTP_METHOD_NOT_ALLOWED)
-      .end(done);
-  });
-
-  it('responds correctly to a request to the /v1/authenticate endpoint', (done) => {
-    request(server)
-      .post('/v1/authenticate')
-      .type('json')
-      .set('Accept', 'application/json')
-      .send(Real_string)
+      .send({docs: '{\n  \"region\" : \"us-east-2\"\n }', signiture: '-----BEGIN PKC-----'})
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(HTTP_OK)
       .end((err, res) => {
-        res.body.should.have.properties('lease_duration');
-        res.body.should.have.property('renewable');
-        res.body.should.have.property('data');
+        res.body.should.have.properties('errors');
+        res.body.should.have.property('status');
+        res.body.code.should.equal(HTTP_BAD_REQUEST);
+        res.body.errors.length.should.equal(1);
+        done();
+      });
+  });
+
+  it('responds with the correct error for a request with maleformed json in the document', (done) => {
+    request(server)
+      .post('/v1/authenticate')
+      .set('Accept', 'application/json')
+      .send({docs: 'us-east-2', signiture: '-----BEGIN PKC-----'})
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect(HTTP_OK)
+      .end((err, res) => {
+        res.body.should.have.properties('errors');
+        res.body.should.have.property('status');
+        res.body.code.should.equal(HTTP_BAD_REQUEST);
+        res.body.errors.length.should.equal(1);
+        done();
+      });
+  });
+
+  it('responds with the correct error for a request without a signiture', (done) => {
+    request(server)
+      .post('/v1/authenticate')
+      .set('Accept', 'application/json')
+      .send({document: '{\n  \"region\" : \"us-east-2\"\n }', sig: '-----BEGIN PKC-----'})
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect(HTTP_OK)
+      .end((err, res) => {
+        res.body.should.have.properties('errors');
+        res.body.should.have.property('status');
+        res.body.code.should.equal(HTTP_BAD_REQUEST);
+        res.body.errors.length.should.equal(1);
+        done();
+      });
+  });
+
+  it('responds with the correct error for a request without both a document and a signiture', (done) => {
+    request(server)
+      .post('/v1/authenticate')
+      .set('Accept', 'application/json')
+      .send({docs: '{\n  \"region\" : \"us-east-2\"\n }', sig: '-----BEGIN PKC-----'})
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect(HTTP_OK)
+      .end((err, res) => {
+        res.body.should.have.properties('errors');
+        res.body.should.have.property('status');
+        res.body.code.should.equal(HTTP_BAD_REQUEST);
+        res.body.errors.length.should.equal(2);
         done();
       });
   });
