@@ -35,6 +35,22 @@ describe('Validate the Document\'s contents v1', () => {
     server.close(done);
   });
 
+  it('responds correctly to a malformed request', (done) => {
+    request(server)
+      .post('/v1/authenticate')
+      .type('json')
+      .set('Accept', 'application/json')
+      .send(bad_signature)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect(HTTP_OK)
+      .end((err, res) => {
+        res.body.should.have.properties('errors');
+        res.body.code.should.equal(HTTP_BAD_REQUEST);
+        res.body.errors.should.equal('Signatureis not valid');
+        done();
+      });
+  });
+
   it('responds correctly to a properly formated request', (done) => {
     request(server)
       .post('/v1/authenticate')
