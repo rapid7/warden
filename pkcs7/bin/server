@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'openssl'
+require 'sinatra'
+require 'sinatra/json'
+
+certificate = OpenSSL::X509::Certificate.new(
+  IO.read(File.expand_path('../../resource/certificate.pem', __FILE__))
+)
+store = OpenSSL::X509::Store.new
+
+post '/validate' do
+  request.body.rewind
+  parameters = JSON.parse(request.body.read, :symbolize_names => true)
+
+  signature = OpenSSL::PKCS7.new(parameters[:signature])
+  valid = signature.verify([certificate], store, parameters[:data], OpenSSL::PKCS7::NOVERIFY)
+
+  json :valid => valid,
+       :signers => (signature.signers.map do |signer|
+         {
+           :name => signer.name.to_s,
+           :signed_time => signer.signed_time.to_s
+         }
+       end)
+end
