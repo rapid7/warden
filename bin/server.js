@@ -20,6 +20,8 @@ const Path = require('path');
 const Logger = require('../lib/logger');
 const app = express();
 
+const signature = require('../lib/control/v1/signature');
+
 // Load nconf into the global namespace
 global.Config = require('nconf')
     .env()
@@ -48,6 +50,8 @@ require('../lib/control/v1/authenticate').attach(app);
 const host = Config.get('service:hostname');
 const port = Config.get('service:port');
 const server = http.createServer(app);
+
+signature.startServer(app);
 
 server.on('error', (err) => global.Log.error(err));
 
