@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/rapid7/warden#readme",
   "dependencies": {
+    "aws-sdk": "^2.3.19",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
     "winston": "^2.2.0"
