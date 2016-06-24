@@ -14,13 +14,12 @@ const args = require('yargs')
   .argv;
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const expressWinston = require('express-winston');
 const http = require('http');
 const Path = require('path');
 const Logger = require('../lib/logger');
 const app = express();
-
-const signature = require('../lib/control/v1/signature');
 
 // Load nconf into the global namespace
 global.Config = require('nconf')
@@ -42,6 +41,8 @@ app.use(expressWinston.logger({
   baseMeta: {source: 'request', type: 'request'}
 }));
 
+app.use(bodyParser.json());
+
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
 require('../lib/control/v1/authenticate').attach(app);
@@ -50,8 +51,6 @@ require('../lib/control/v1/authenticate').attach(app);
 const host = Config.get('service:hostname');
 const port = Config.get('service:port');
 const server = http.createServer(app);
-
-signature.startServer(app);
 
 server.on('error', (err) => global.Log.error(err));
 
