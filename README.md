@@ -1,4 +1,4 @@
-# Warden [![Build Status](https://travis-ci.org/rapid7/warden.svg)](https://travis-ci.org/rapid7/warden)
+# Warden [![Build Status](https://travis-ci.org/rapid7/warden.svg?branch=master)](https://travis-ci.org/rapid7/warden)
 ## Description
 
 Warden is a microservice which runs on each node of a vault cluster. It allows
