@@ -1,11 +1,10 @@
 /* eslint-env mocha */
 'use strict';
-
 const request = require('supertest');
 
 require('should');
 
-const testServerPort = 3000;
+const testServerPort = 9806;
 const HTTP_OK = 200;
 const HTTP_BAD_REQUEST = 400;
 
@@ -22,12 +21,15 @@ const neither_doc_nor_sig = {doc: '{\n  \"privateIp\" : \"10.11.12.13\",\n  \"de
  */
 const makeServer = () => {
   const app = require('express')();
+  const endpoint = require('../lib/control/v1/authenticate').attach(app);
 
-  require('../lib/control/v1/authenticate').attach(app);
   return app.listen(testServerPort);
 };
 
-describe('Validate the body of the request v1', () => {
+const nock = require('nock');
+
+nock.recorder.rec();
+describe('Validate the body of the request v1', function() {
   let server = null;
 
   beforeEach(() => {
@@ -102,7 +104,11 @@ describe('Validate the body of the request v1', () => {
       });
   });
 
-  it('responds correctly to a properly formated request', (done) => {
+  it.only('responds correctly to a properly formated request', function (done) {
+    nock('http://127.0.0.1:9806')
+                .post('/validate')
+                .reply(HTTP_OK, new Buffer('{ valid: true }'));
+
     request(server)
       .post('/v1/authenticate')
       .type('json')
@@ -119,3 +125,5 @@ describe('Validate the body of the request v1', () => {
   });
 
 });
+
+nock.cleanAll();
