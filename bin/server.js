@@ -18,7 +18,6 @@ const expressWinston = require('express-winston');
 const http = require('http');
 const Path = require('path');
 const Logger = require('../lib/logger');
-const bodyParser = require('body-parser');
 const SigServer = require('../lib/control/v1/signature');
 
 const signatureServer = new SigServer.Server();
@@ -43,8 +42,6 @@ app.use(expressWinston.logger({
   level: global.Config.get('log:level'),
   baseMeta: {source: 'request', type: 'request'}
 }));
-
-app.use(bodyParser.json());
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
