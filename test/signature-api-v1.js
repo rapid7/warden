@@ -27,15 +27,6 @@ describe('Validate the Signature\'s contents v1', () => {
     should(signature.signatureValidate(req, res, next, server)).true;
   });
 
-  it.only('responds correctly to a maleformed signature request', function () {
-    req.body = bad_signature;
-    nock('http://localhost:9806')
-                .post('/validate')
-                .reply(FORBIDDEN, {
-                  valid: false
-                });
-    should(signature.signatureValidate(req, res, next, server)).have.property('code', FORBIDDEN);
-  });
   nock.cleanAll();
 
 });
