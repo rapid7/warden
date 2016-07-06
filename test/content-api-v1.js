@@ -13,7 +13,7 @@ const four_wrong = {document: '{\n  \"instanceId\" : \"im-aazaaaaa\",\n  \"accou
 
 describe('Validate the Document\'s contents v1', () => {
   const req = {};
-  const res = {status: function() {return this}, json: function(any) {return any}};
+  const res = {status() {return this}, json(any) {return any}};
   const next = function() {return true};
 
   it('responds with the correct error for a document without a Region', function () {
