@@ -19,6 +19,9 @@ const http = require('http');
 const Path = require('path');
 const Logger = require('../lib/logger');
 const bodyParser = require('body-parser');
+const SigServer = require('../lib/control/v1/signature');
+
+const signatureServer = new SigServer.Server();
 const app = express();
 
 // Load nconf into the global namespace
@@ -45,12 +48,18 @@ app.use(bodyParser.json());
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
-require('../lib/control/v1/authenticate').attach(app);
+require('../lib/control/v1/authenticate').attach(app, signatureServer);
 
 // Instantiate server and start it
 const host = Config.get('service:hostname');
 const port = Config.get('service:port');
 const server = http.createServer(app);
+
+signatureServer.start();
+
+process.on('exit', function() {
+  signatureServer.stop();
+});
 
 server.on('error', (err) => global.Log.error(err));
 
