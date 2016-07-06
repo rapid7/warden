@@ -18,6 +18,7 @@ const expressWinston = require('express-winston');
 const http = require('http');
 const Path = require('path');
 const Logger = require('../lib/logger');
+const bodyParser = require('body-parser');
 const app = express();
 
 // Load nconf into the global namespace
@@ -39,6 +40,8 @@ app.use(expressWinston.logger({
   level: global.Config.get('log:level'),
   baseMeta: {source: 'request', type: 'request'}
 }));
+
+app.use(bodyParser.json());
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
