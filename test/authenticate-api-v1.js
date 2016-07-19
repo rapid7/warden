@@ -79,9 +79,9 @@ describe('Authenticate API v1', () => {
       .expect('Content-Type', 'application/json; charset=utf-8')
       .expect(HTTP_OK)
       .end((err, res) => {
+        res.body.should.have.property('client_token');
         res.body.should.have.properties('lease_duration');
         res.body.should.have.property('renewable');
-        res.body.should.have.property('data');
         done();
       });
   });
