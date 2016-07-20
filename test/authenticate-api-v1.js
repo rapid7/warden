@@ -66,33 +66,4 @@ describe('Authenticate API v1', () => {
       .end(done);
   });
 
-  it('responds correctly to a request to the /v1/authenticate endpoint', (done) => {
-    nock('http://localhost:9806')
-                .post('/validate')
-                .reply(HTTP_OK, {
-                  valid: true,
-                  goodResponse
-                });
-    nock('http://localhost:8200')
-                .post('/v1/auth/token/create')
-                .times(2)
-                .reply(HTTP_OK, {
-                  valid: true,
-                  goodResponse
-                });
-    request(server)
-      .post('/v1/authenticate')
-      .type('json')
-      .set('Accept', 'application/json')
-      .send(Real_string)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .expect(HTTP_OK)
-      .end((err, res) => {
-        res.body.should.have.property('client_token');
-        res.body.should.have.properties('lease_duration');
-        res.body.should.have.property('renewable');
-        done();
-      });
-  });
-
 });
