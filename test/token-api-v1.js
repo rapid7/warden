@@ -20,17 +20,17 @@ describe('Validate getting a token from vault', () => {
   const req = {};
   const res = {status() {return this}, json(any) {return any}};
   const next = function() {return true};
-  const err = function(e) {return e};
+  const vtoken = 'UUID';
 
   it('responds correctly to a properly formated request', function () {
     req.body = nothing_wrong;
     req.document = docs;
-    nock('http://localhost:9806')
+    nock('http://localhost:8200')
                 .post('/v1/auth/token/create')
                 .reply(HTTP_OK, {
                   goodResponse
                 });
-    should(token.create(req, res, next)).true;
+    should(token.create(req, res, next, vtoken)).true;
   });
 
   nock.cleanAll();
