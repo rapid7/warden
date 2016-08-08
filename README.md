@@ -1,4 +1,6 @@
 # Warden [![Build Status](https://travis-ci.org/rapid7/warden.svg?branch=master)](https://travis-ci.org/rapid7/warden)
+[![Coverage Status](https://coveralls.io/repos/github/rapid7/warden/badge.svg?branch=master)](https://coveralls.io/github/rapid7/warden?branch=master)
+
 ## Description
 
 Warden is an authentication middleware service that runs on each node in the vault
