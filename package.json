@@ -7,9 +7,12 @@
     "bin": "bin"
   },
   "scripts": {
+    "start": "node ./bin/server.js",
     "test": "mocha",
-    "lint": "eslint bin/** lib/** test/**",
-    "install": "cd pkcs7 && bundle install"
+    "cover": "rm -Rf coverage/* && istanbul cover _mocha -- -R spec",
+    "lint": "eslint bin/* lib/*.js lib/**/*.js test/*.js test/**/*.js",
+    "report": "coveralls < ./coverage/lcov.info",
+    "warden-mock": "node ./test/bin/warden.js"
   },
   "repository": {
     "type": "git",
@@ -31,17 +34,17 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "coveralls": "^2.11.9",
-    "eslint": "^2.4.0",
-    "eslint-config-airbnb": "^6.2.0",
-    "eslint-config-rapid7": "0.0.15",
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.2.0",
+    "eslint-config-rapid7": "1.1.1",
     "eslint-plugin-rapid7": "^5.0.1",
-    "eslint-plugin-react": "^4.2.3",
-    "mocha": "^2.4.5",
+    "eslint-plugin-react": "^6.0.0",
+    "mocha": "^3.0.2",
     "mocha-lcov-reporter": "^1.2.0",
     "proxyquire": "^1.7.4",
-    "should": "^8.3.0",
+    "should": "^10.0.0",
     "should-sinon": "0.0.5",
     "sinon": "^1.17.3",
-    "supertest": "^1.2.0"
+    "supertest": "^2.0.0"
   }
 }
