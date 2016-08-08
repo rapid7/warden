@@ -45,7 +45,7 @@ app.use(expressWinston.logger({
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
-require('../lib/control/v1/authenticate').attach(app, signatureServer, Config.get('vault:token'));
+require('../lib/control/v1/authenticate').attach(app, signatureServer, Config.get('vault'));
 
 // Instantiate server and start it
 const host = Config.get('service:hostname');
