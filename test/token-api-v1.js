@@ -7,6 +7,7 @@ const token = require('../lib/control/validation/token');
 
 const HTTP_OK = 200;
 const FORBIDDEN = 403;
+const PORT = 8200;
 
 //TODO
 
@@ -20,7 +21,7 @@ describe('Validate getting a token from vault', () => {
   const req = {};
   const res = {status() {return this}, json(any) {return any}};
   const next = function() {return true};
-  const vtoken = 'UUID';
+  const vault = {port: PORT, hostname: 'localhost', token: '3e5f8293-eb83-37be-2ed3-03e4324c5e53'};
 
   it('responds correctly to a properly formated request', function () {
     req.body = nothing_wrong;
@@ -30,7 +31,7 @@ describe('Validate getting a token from vault', () => {
                 .reply(HTTP_OK, {
                   goodResponse
                 });
-    should(token.create(req, res, next, vtoken)).true;
+    should(token.create(req, res, next, vault)).true;
   });
 
   nock.cleanAll();
