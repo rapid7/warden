@@ -37,6 +37,20 @@ Then ensure that the settings in /config/defaults.json are correct for your need
 to launch the warden server, be in the root directory and call ```node bin/server.js```
 This will launch both warden and the Sinatra app to verify signatures of requests.
 
+## Releasing
+Steps to release new version:
+1. [increment the version][npm-version]
+2. Build and upload a package
+3. Create a new release on [github.com]
+
+To increment version, run:
+~~~bash
+npm version minor
+rake
+~~~
+
+Then following the steps to create the release on [github.com]
+
 ## Configuration
 
 TODO
@@ -45,3 +59,5 @@ TODO
 
 [Node.js]: https://nodejs.org/en/
 [tokend]: https://github.com/rapid7/tokend
+[npm-version]: https://docs.npmjs.com/cli/version
+[github.com]: https://www.github.com
