@@ -4,7 +4,7 @@ project_path = ::File.expand_path('../../', __FILE__)
 package_dot_json = JSON.parse(IO.read(::File.join(project_path, 'package.json')))
 
 name package_dot_json['name']
-description 'Install and configure https://github.com/rapid7/tokend'
+description 'Install and configure https://github.com/rapid7/warden'
 
 maintainer 'Rapid7 Inc.'
 maintainer_email 'coreservices@rapid7.com'

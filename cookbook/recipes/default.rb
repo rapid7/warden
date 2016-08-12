@@ -49,7 +49,7 @@ end
 
 ## Fetch and install warden
 remote_file 'warden' do
-  source warden::Helpers.github_download('rapid7', 'warden', node['warden']['version'])
+  source Warden::Helpers.github_download('rapid7', 'warden', node['warden']['version'])
   path ::File.join(Chef::Config['file_cache_path'], "warden-#{node['warden']['version']}.deb")
 
   action :create_if_missing
