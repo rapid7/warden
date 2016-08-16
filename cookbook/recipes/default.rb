@@ -77,26 +77,6 @@ template '/etc/init/warden.conf' do
   )
 end
 
-directory 'warden-configuration-directory' do
-  path ::File.dirname(node['warden']['paths']['configuration'])
-
-  owner node['warden']['user']
-  group node['warden']['group']
-  mode '0755'
-
-  recursive true
-end
-
-template 'warden-configuration' do
-  path node['warden']['paths']['configuration']
-  source 'json.erb'
-
-  owner node['warden']['user']
-  group node['warden']['group']
-
-  variables(:properties => node['warden']['config'])
-end
-
 service 'warden' do
   ## The wrapping cookbook must call `action` on this resource to start/enable
   action :nothing
