@@ -3,6 +3,7 @@ default['warden']['group'] = 'warden'
 
 default['warden']['paths']['directory'] = '/opt/warden'
 default['warden']['paths']['executable'] = ::File.join(node['warden']['paths']['directory'], 'bin/server.js')
+default['warden']['paths']['configuration'] = '/etc/warden/config.json'
 
 default['warden']['config'] = Mash.new
 default['warden']['version'] = nil
