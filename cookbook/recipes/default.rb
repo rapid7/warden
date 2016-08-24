@@ -71,6 +71,8 @@ template '/etc/init/warden.conf' do
     :description => 'warden configuration service',
     :user => node['warden']['user'],
     :executable => node['warden']['paths']['executable'],
+    :flags => [
+      "-c #{node['warden']['paths']['configuration']}"
     ]
   )
 end
