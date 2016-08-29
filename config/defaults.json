@@ -2,7 +2,7 @@
   "vault": {
     "port": 8200,
     "hostname": "localhost",
-    "token": "3e5f8293-eb83-37be-2ed3-03e4324c5e53"
+    "token":
   },
   "service": {
     "port": 8080,
