@@ -14,7 +14,7 @@ module Warden
   module Helpers
     class << self
       def github_download(owner, repo, version)
-        "https://github.com/#{owner}/#{repo}/releases/download/v#{version}/warden#{version}_amd64.deb"
+        "https://github.com/#{owner}/#{repo}/releases/download/v#{version}/warden_#{version}_amd64.deb"
       end
     end
   end

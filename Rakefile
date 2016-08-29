@@ -76,7 +76,6 @@ task :warden_source => [:install] do
   cp ::File.join(base_dir, 'config', 'defaults.json'), ::File.join(base_dir, config_dir)
 end
 
-
 task :chdir_pkg => [:package_dirs] do
   cd ::File.join(base_dir, 'pkg')
 end
