@@ -33,6 +33,9 @@ The steps to validate the request for a token are:
 
 ## Usage
 
+See the [getting started guide][gsg] for help installing, configuring, and
+using warden.
+
 First insure that ruby 2.2.4 and node 4.4.0 are installed on your vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
@@ -61,5 +64,6 @@ TODO
 
 [Node.js]: https://nodejs.org/en/
 [tokend]: https://github.com/rapid7/tokend
+[gsg]: ./docs/getting-started/
 [npm-version]: https://docs.npmjs.com/cli/version
 [github.com]: https://www.github.com
