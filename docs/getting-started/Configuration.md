@@ -40,15 +40,15 @@ The configuration file, located in warden/config/defaults.json below is the defa
 
 ### Configuration Key Reference ###
 
-* `Vault` - These settings contain how warden will reach the vault server.
+* `vault` - These settings contain how warden will reach the Vault server.
 
   The following keys are available:
 
-  * `port` - The port vault listens on. Defaults to 8200.
+  * `port` - The port Vault listens on. Defaults to 8200.
 
-  * `hostname` - The address the HTTP request to vault uses. Defaults to "localhost".
+  * `hostname` - The address the HTTP request to Vault uses. Defaults to "localhost".
 
-  * `token` The token from vault that warden uses to create orphaned tokens for requesting servers.
+  * `token` The token from Vault that warden uses to create orphaned tokens for requesting servers.
 
 * `log` - These settings control logging.
 

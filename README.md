@@ -5,7 +5,7 @@
 
 ## Description
 
-Warden is an authentication middleware service that runs on each node in the vault
+Warden is an authentication middleware service that runs on each node in the Vault
 cluster. It uses a privileged Vault token to provision orphaned tokens for [tokend][].
 the orphaned token has a specific role that grats it access to other services.
 
@@ -28,7 +28,7 @@ The steps to validate the request for a token are:
 3. validate the the signature is from an EC2 instance
 4. Validate the document has all of the necessary information to proceed
 5. Fetch metadata from S3 that matches data from the json document
-6. acquire a token for vault that grants access to the specific secrets
+6. acquire a token for Vault that grants access to the specific secrets
 7. return the token to the instance requesting a token
 
 ## Usage
@@ -36,7 +36,7 @@ The steps to validate the request for a token are:
 See the [getting started guide][gsg] for help installing, configuring, and
 using warden.
 
-First ensure that ruby 2.2.4 and node 4.4.0 are installed on your vault servers.
+First ensure that ruby 2.2.4 and node 4.4.0 are installed on your Vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
 to launch the warden server, be in the root directory and call ```node bin/server.js```

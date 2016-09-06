@@ -1,7 +1,8 @@
 # How to use warden #
 
 The warden service is the core process in warden. It's responsible for
-providing a way to grant vault tokens to [tokend][tokend]. warden is designed to run on every vault server that stores secrets.
+providing a way to grant Vault tokens to [tokend][tokend]. warden is designed to
+run on every Vault server that stores secrets.
 
 ## Running warden ##
 
@@ -20,7 +21,6 @@ When starting warden you should see output similar to this:
 When running warden you should see output similar to this:
 
 ~~~text
-authenticate request recieved
 {"res":{"statusCode":200},"req":{"url":"/v1/authenticate","headers":{"host":"localhost:8080","user-agent":"curl/7.43.0","accept":"*/*","content-type":"application/json","content-length":"1621","expect":"100-continue"},"method":"POST","httpVersion":"1.1","originalUrl":"/v1/authenticate","query":{}},"responseTime":76,"source":"request","type":"request","level":"info","message":"POST /v1/authenticate 200 76ms","timestamp":"2016-09-06T17:23:00.991Z"}
 ~~~
 
@@ -41,6 +41,10 @@ you'll see output similar to this:
   "uptime": 1222101
 }
 ~~~
+
+  * `status` - Returns "okay" if warden is running.
+
+  * `uptime` - Returns the time that warden has been running in milliseconds.
 
 [installation]: "./Installation.md"
 [configuration]: "./Configuration.md"
