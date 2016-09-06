@@ -1,4 +1,4 @@
-# How to configure warden #
+# How to Configure Warden #
 
 Configuration options for warden can be specified by providing a configuration
 file on the command-line.
@@ -40,7 +40,7 @@ The configuration file, located in warden/config/defaults.json below is the defa
 
 ### Configuration Key Reference ###
 
-* `vault` - These settings contain how warden will reach the vault server.
+* `Vault` - These settings contain how warden will reach the vault server.
 
   The following keys are available:
 

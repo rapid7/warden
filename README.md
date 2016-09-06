@@ -36,7 +36,7 @@ The steps to validate the request for a token are:
 See the [getting started guide][gsg] for help installing, configuring, and
 using warden.
 
-First insure that ruby 2.2.4 and node 4.4.0 are installed on your vault servers.
+First ensure that ruby 2.2.4 and node 4.4.0 are installed on your vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
 to launch the warden server, be in the root directory and call ```node bin/server.js```

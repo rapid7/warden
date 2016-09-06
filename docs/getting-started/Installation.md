@@ -19,7 +19,7 @@ Use `dpkg` to install warden.
 dpkg -i /tmp/warden.deb
 ~~~
 
-warden is installed into `/opt/warden`.
+Warden is installed into `/opt/warden`.
 
 ## Installing from source ##
 
