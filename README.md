@@ -45,7 +45,7 @@ It's launch automatically when warden starts and does not need anything special 
 
 ## Releasing
 Steps to release new version:
-1. [increment the version][npm-version]
+1. [Increment the version][npm-version]
 2. Build and upload a package
 3. Create a new release on [github.com]
 
