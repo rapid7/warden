@@ -19,7 +19,7 @@ containing configuration values.
 
 ### Default Configuration File ###
 
-The configuration file, located in Warden/config/defaults.json below is the default settings for Warden.
+The configuration file, located in warden/config/defaults.json below is the default settings for Warden.
 
 ~~~json
 {
