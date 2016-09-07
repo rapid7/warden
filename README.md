@@ -59,7 +59,7 @@ Then following the steps to create the release on [github.com]
 
 ## Configuration
 
-TODO
+[Warden configuration can be found under the configuration section in the getting started guide.][gsg]
 
 
 
