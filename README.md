@@ -21,13 +21,13 @@ with an error, or pass the request to the next layer. Layers must respond
 immediately with an error if a verification task fails.
 
 The steps to validate the request for a token are:
-1. receive request for token
-2. validate body of request contains a signature and a json document of EC2 instance data
-3. validate the the signature is from an EC2 instance
+1. Receive request for token
+2. Validate body of request contains a signature and a json document of EC2 instance data
+3. Validate the the signature is from an EC2 instance
 4. Validate the document has all of the necessary information to proceed
 5. Fetch metadata from S3 that matches data from the json document
-6. acquire a token for Vault that grants access to the specific secrets
-7. return the token to the instance requesting a token
+6. Acquire a token for Vault that grants access to the specific secrets
+7. Return the token to the instance requesting a token
 
 ## Usage
 
