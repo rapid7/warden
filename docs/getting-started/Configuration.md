@@ -1,6 +1,6 @@
 # How to Configure Warden #
 
-Configuration options for warden can be specified by providing a configuration
+Configuration options for Warden can be specified by providing a configuration
 file on the command-line.
 
 ## Command-line Options ##
@@ -19,7 +19,7 @@ containing configuration values.
 
 ### Default Configuration File ###
 
-The configuration file, located in warden/config/defaults.json below is the default settings for warden.
+The configuration file, located in Warden/config/defaults.json below is the default settings for Warden.
 
 ~~~json
 {
@@ -40,7 +40,7 @@ The configuration file, located in warden/config/defaults.json below is the defa
 
 ### Configuration Key Reference ###
 
-* `vault` - These settings contain how warden will reach the Vault server.
+* `vault` - These settings contain how Warden will reach the Vault server.
 
   The following keys are available:
 
@@ -48,13 +48,13 @@ The configuration file, located in warden/config/defaults.json below is the defa
 
   * `hostname` - The address the HTTP request to Vault uses. Defaults to "localhost".
 
-  * `token` The token from Vault that warden uses to create orphaned tokens for requesting servers.
+  * `token` The token from Vault that Warden uses to create orphaned tokens for requesting servers.
 
 * `log` - These settings control logging.
 
   Warden treats logging as an event stream and logs to `stdout`. Logged events
   are formatted as JSON objects separated by newlines. If you need routing or
-  storage of logs, you'll want to handle that outside warden.
+  storage of logs, you'll want to handle that outside Warden.
 
   The following keys are available:
 
@@ -63,10 +63,10 @@ The configuration file, located in warden/config/defaults.json below is the defa
     "debug" is the most verbose and "error" is the least verbose. Defaults to
     "info".
 
-* `service` - These settings configure how warden is set up.
+* `service` - These settings configure how Warden is set up.
 
   The following keys are available:
 
-  * `port` - The port warden listens on. Defaults to 8080.
+  * `port` - The port Warden listens on. Defaults to 8080.
 
-  * `hostname` - The address the HTTP request to warden uses. Defaults to "localhost".
+  * `hostname` - The address the HTTP request to Warden uses. Defaults to "localhost".

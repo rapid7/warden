@@ -34,13 +34,13 @@ The steps to validate the request for a token are:
 ## Usage
 
 See the [getting started guide][gsg] for help installing, configuring, and
-using warden.
+using Warden.
 
 First ensure that ruby 2.2.4 and node 4.4.0 are installed on your Vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
-to launch the warden server, be in the root directory and call ```node bin/server.js```
-This will launch both warden and the Sinatra app to verify signatures of requests.
+to launch the Warden server, be in the root directory and call ```node bin/server.js```
+This will launch both Warden and the Sinatra app to verify signatures of requests.
 
 ## Releasing
 Steps to release new version:
