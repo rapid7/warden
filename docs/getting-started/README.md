@@ -1,4 +1,4 @@
-# Getting started with warden #
+# Getting started with Warden #
 
 * [How to install Warden](./Installation.md)
   * [Installing from the Debian package](./Installation.md#installing-from-the-debian-package)
