@@ -6,7 +6,7 @@ run on every Vault server that stores secrets.
 
 ## Running Warden ##
 
-The Warden service is started by running the `bin/server.js` binary. The binary
+The Warden service is started by running the `node bin/server.js` binary. The binary
 can be found in the folder where [Warden is installed][installation]. The
 service blocks, running forever or until it's told to quit. The binary supports
 several [configuration options][Configuration].

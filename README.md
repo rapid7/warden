@@ -5,9 +5,9 @@
 
 ## Description
 
-Warden, A [Node.js][] service, is an authentication middleware service that runs on each node in the Vault
+Warden, a [Node.js][] service, is an authentication middleware service that runs on each node in the Vault
 cluster. It uses a privileged Vault token to provision orphaned tokens for [tokend][].
-the orphaned token has a specific role that grants it access to other services.
+The orphaned token has a specific role that grants it access to other services.
 
 Warden is implemented as chains of middleware functions that either validate
 request parameters or fetch more data using previously validated parameters as
