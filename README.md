@@ -37,8 +37,11 @@ using Warden.
 First ensure that ruby 2.2.4 and node 4.4.x are installed on your Vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
-to launch the Warden server, be in the root directory and call ```node bin/server.js```
+In order to launch the Warden service, navigate to ```/opt/warden/``` and call ```node bin/server.js```
 This will launch both Warden and the Sinatra app to verify signatures of requests.
+
+The Sinatra app checks the signature on the document to ensure that the signature is real and valid.
+It's launch automatically when warden starts and does not need anything special configuration.
 
 ## Releasing
 Steps to release new version:

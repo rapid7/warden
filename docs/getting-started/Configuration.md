@@ -14,12 +14,12 @@ The options below are specified on the command-line.
 
 ## Configuration Files ##
 
-Configuration files are JSON formatted. They are a single JSON object
-containing configuration values.
+Configuration files are a single JSON formatted object, containing additional
+objects or key value pairs.
 
 ### Default Configuration File ###
 
-The configuration file, located in warden/config/defaults.json below is the default settings for Warden.
+This is the default configuration, which you can find in /config/defaults.json.
 
 ~~~json
 {
@@ -54,7 +54,7 @@ The configuration file, located in warden/config/defaults.json below is the defa
 
   Warden treats logging as an event stream and logs to `stdout`. Logged events
   are formatted as JSON objects separated by newlines. If you need routing or
-  storage of logs, you'll want to handle that outside Warden.
+  storage of logs, you'll need to handle that outside Warden.
 
   The following keys are available:
 
