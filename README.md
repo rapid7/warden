@@ -5,11 +5,9 @@
 
 ## Description
 
-Warden is an authentication middleware service that runs on each node in the vault
+Warden, a [Node.js][] service, is an authentication middleware service that runs on each node in the Vault
 cluster. It uses a privileged Vault token to provision orphaned tokens for [tokend][].
-the orphaned token has a specific role that grats it access to other services.
-
-Warden runs on [Node.js][].
+The orphaned token has a specific role that grants it access to other services.
 
 Warden is implemented as chains of middleware functions that either validate
 request parameters or fetch more data using previously validated parameters as
@@ -23,25 +21,35 @@ with an error, or pass the request to the next layer. Layers must respond
 immediately with an error if a verification task fails.
 
 The steps to validate the request for a token are:
-1. receive request for token
-2. validate body of request contains a signature and a json document of EC2 instance data
-3. validate the the signature is from an EC2 instance
+
+
+1. Receive request for token
+2. Validate body of request contains a signature and a json document of EC2 instance data
+3. Validate the the signature is from an EC2 instance
 4. Validate the document has all of the necessary information to proceed
 5. Fetch metadata from S3 that matches data from the json document
-6. acquire a token for vault that grants access to the specific secrets
-7. return the token to the instance requesting a token
+6. Acquire a token for Vault that grants access to the specific secrets
+7. Return the token to the instance requesting a token
 
 ## Usage
 
-First insure that ruby 2.2.4 and node 4.4.0 are installed on your vault servers.
+See the [getting started guide][gsg] for help installing, configuring, and
+using Warden.
+
+First ensure that ruby 2.2.4 and node 4.4.x are installed on your Vault servers.
 Then ensure that the settings in /config/defaults.json are correct for your needs.
 
-to launch the warden server, be in the root directory and call ```node bin/server.js```
-This will launch both warden and the Sinatra app to verify signatures of requests.
+In order to launch the Warden service, navigate to ```/opt/warden/``` and call ```node bin/server.js```
+This will launch both Warden and the Sinatra app to verify signatures of requests.
+
+The Sinatra app checks the signature on the document to ensure that the signature is real and valid.
+It's launch automatically when warden starts and does not need anything special configuration.
 
 ## Releasing
 Steps to release new version:
-1. [increment the version][npm-version]
+
+
+1. [Increment the version][npm-version]
 2. Build and upload a package
 3. Create a new release on [github.com]
 
@@ -55,11 +63,12 @@ Then following the steps to create the release on [github.com]
 
 ## Configuration
 
-TODO
+[Warden configuration can be found under the configuration section in the getting started guide.][gsg]
 
 
 
 [Node.js]: https://nodejs.org/en/
 [tokend]: https://github.com/rapid7/tokend
+[gsg]: ./docs/getting-started/
 [npm-version]: https://docs.npmjs.com/cli/version
 [github.com]: https://www.github.com
