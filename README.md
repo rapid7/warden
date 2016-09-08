@@ -21,6 +21,8 @@ with an error, or pass the request to the next layer. Layers must respond
 immediately with an error if a verification task fails.
 
 The steps to validate the request for a token are:
+
+
 1. Receive request for token
 2. Validate body of request contains a signature and a json document of EC2 instance data
 3. Validate the the signature is from an EC2 instance
@@ -45,6 +47,8 @@ It's launch automatically when warden starts and does not need anything special 
 
 ## Releasing
 Steps to release new version:
+
+
 1. [Increment the version][npm-version]
 2. Build and upload a package
 3. Create a new release on [github.com]
