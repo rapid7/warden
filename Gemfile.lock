@@ -5,12 +5,12 @@ GEM
     archive-tar-minitar (0.5.2)
     arr-pm (0.0.10)
       cabin (> 0)
-    aws-sdk (2.5.10)
-      aws-sdk-resources (= 2.5.10)
-    aws-sdk-core (2.5.10)
+    aws-sdk (2.5.11)
+      aws-sdk-resources (= 2.5.11)
+    aws-sdk-core (2.5.11)
       jmespath (~> 1.0)
-    aws-sdk-resources (2.5.10)
-      aws-sdk-core (= 2.5.10)
+    aws-sdk-resources (2.5.11)
+      aws-sdk-core (= 2.5.11)
     backports (3.6.8)
     berkshelf (4.3.5)
       addressable (~> 2.3, >= 2.3.4)
@@ -187,7 +187,7 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
-    rake (11.2.2)
+    rake (10.5.0)
     retryable (2.0.4)
     ridley (4.6.1)
       addressable
@@ -273,9 +273,9 @@ PLATFORMS
 DEPENDENCIES
   builderator (~> 1.0)
   fpm (~> 1.6)
-  rake
+  rake (~> 10.5)
   sinatra (~> 1.4)
   sinatra-json (~> 0.1)
 
 BUNDLED WITH
-   1.12.5
+   1.13.0
