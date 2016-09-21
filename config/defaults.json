@@ -5,7 +5,7 @@
     "token": "Place-Vault-Token-Here"
   },
   "service": {
-    "port": 8080,
+    "port": 8705,
     "hostname": "localhost"
   },
   "log": {
