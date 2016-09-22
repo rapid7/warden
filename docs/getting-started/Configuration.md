@@ -29,7 +29,7 @@ This is the default configuration, which you can find in /config/defaults.json.
     "token": "Place-Vault-Token-Here"
   },
   "service": {
-    "port": 8080,
+    "port": 8705,
     "hostname": "localhost"
   },
   "log": {
@@ -67,6 +67,6 @@ This is the default configuration, which you can find in /config/defaults.json.
 
   The following keys are available:
 
-  * `port` - The port Warden listens on. Defaults to 8080.
+  * `port` - The port Warden listens on. Defaults to 8705.
 
   * `hostname` - The address the HTTP request to Warden uses. Defaults to "localhost".

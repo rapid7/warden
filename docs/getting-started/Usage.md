@@ -15,13 +15,13 @@ When starting Warden you should see output similar to this:
 
 ~~~text
 {"level":"info","message":"PKCS7 helper started. PID 10027. Port 9806","timestamp":"2016-09-06T14:31:20.421Z"}
-{"level":"info","message":"Listening on localhost:8080","timestamp":"2016-09-06T14:31:20.428Z"}
+{"level":"info","message":"Listening on localhost:8705","timestamp":"2016-09-06T14:31:20.428Z"}
 ~~~
 
 When running Warden you should see output similar to this:
 
 ~~~text
-{"res":{"statusCode":200},"req":{"url":"/v1/authenticate","headers":{"host":"localhost:8080","user-agent":"curl/7.43.0","accept":"*/*","content-type":"application/json","content-length":"1621","expect":"100-continue"},"method":"POST","httpVersion":"1.1","originalUrl":"/v1/authenticate","query":{}},"responseTime":76,"source":"request","type":"request","level":"info","message":"POST /v1/authenticate 200 76ms","timestamp":"2016-09-06T17:23:00.991Z"}
+{"res":{"statusCode":200},"req":{"url":"/v1/authenticate","headers":{"host":"localhost:8705","user-agent":"curl/7.43.0","accept":"*/*","content-type":"application/json","content-length":"1621","expect":"100-continue"},"method":"POST","httpVersion":"1.1","originalUrl":"/v1/authenticate","query":{}},"responseTime":76,"source":"request","type":"request","level":"info","message":"POST /v1/authenticate 200 76ms","timestamp":"2016-09-06T17:23:00.991Z"}
 ~~~
 
 ## Stopping Warden ##
