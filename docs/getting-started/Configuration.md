@@ -25,8 +25,28 @@ This is the default configuration, which you can find in /config/defaults.json.
 {
   "vault": {
     "port": 8200,
+    "hostname": "localhost"
+  },
+  "service": {
+    "port": 8705,
+    "hostname": "localhost"
+  },
+  "log": {
+    "level": "info"
+  }
+}
+~~~
+
+### Alternative Configuration File ###
+
+This file has a token added to the Vault object that can be used instead of sending a token to the unseal HTTP API.
+
+~~~json
+{
+  "vault": {
+    "port": 8200,
     "hostname": "localhost",
-    "token": "Place-Vault-Token-Here"
+    "token": "PlaceVaultTokenHere"
   },
   "service": {
     "port": 8705,

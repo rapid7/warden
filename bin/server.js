@@ -32,6 +32,8 @@ if (args.c) {
   global.Config.file(Path.resolve(process.cwd(), args.c));
 }
 global.Config.defaults(require('../config/defaults.json'));
+global.Config.use('memory');
+global.Config.set('flag:unseal', false );
 
 // Set up logging
 global.Log = Logger.attach(global.Config.get('log:level'));
@@ -43,9 +45,14 @@ app.use(expressWinston.logger({
   baseMeta: {source: 'request', type: 'request'}
 }));
 
+if (!!global.Config.get('vault:token')){
+  global.Config.set('flag:unseal', true);
+};
+
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
-require('../lib/control/v1/authenticate').attach(app, signatureServer, Config.get('vault'));
+require('../lib/control/v1/unseal').attach(app);
+require('../lib/control/v1/authenticate').attach(app, signatureServer);
 
 // Instantiate server and start it
 const host = Config.get('service:hostname');
