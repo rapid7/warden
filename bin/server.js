@@ -33,7 +33,7 @@ if (args.c) {
 }
 global.Config.defaults(require('../config/defaults.json'));
 global.Config.use('memory');
-global.Config.set('flag:unseal', false );
+global.Config.set('vault:unseal', false );
 
 // Set up logging
 global.Log = Logger.attach(global.Config.get('log:level'));
@@ -46,7 +46,7 @@ app.use(expressWinston.logger({
 }));
 
 if (!!global.Config.get('vault:token')){
-  global.Config.set('flag:unseal', true);
+  global.Config.set('vault:unseal', true);
 };
 
 // Register endpoints
