@@ -25,6 +25,7 @@
   "dependencies": {
     "aws-sdk": "^2.3.19",
     "body-parser": "^1.15.0",
+    "expect": "^1.20.2",
     "express": "^4.13.4",
     "express-winston": "^2.0.0",
     "nconf": "^0.8.4",
@@ -43,6 +44,7 @@
     "istanbul": "^0.4.3",
     "eslint-plugin-rapid7": "^5.0.1",
     "eslint-plugin-react": "^6.0.0",
+    "expect": "^1.20.2",
     "mocha": "^3.0.2",
     "mocha-lcov-reporter": "^1.2.0",
     "proxyquire": "^1.7.4",

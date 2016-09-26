@@ -5,7 +5,7 @@ global.Config = require('nconf')
 global.Config.use('memory');
 
 const request = require('supertest');
-
+const expect = require('expect')
 const should = require('should');
 
 const testServerPort = 3000;
@@ -53,6 +53,17 @@ describe('unseal API v1', () => {
       .post('/v1/unseal')
       .expect(HTTP_OK)
       .end(done);
+  });
+
+  it('Vault:token is set after call', (done) => {
+    request(server)
+      .post('/v1/unseal')
+      .send('12345678-abcd-1234-!@#$-123456789acb')
+      .expect(HTTP_OK)
+      .end(function(){
+        expect(global.Config.get('vault:token')).toExist();
+        done();
+      });
   });
 
 });
