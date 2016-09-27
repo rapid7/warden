@@ -33,7 +33,6 @@ if (args.c) {
 }
 global.Config.defaults(require('../config/defaults.json'));
 global.Config.use('memory');
-global.Config.set('vault:unseal', false );
 
 // Set up logging
 global.Log = Logger.attach(global.Config.get('log:level'));
@@ -44,10 +43,6 @@ app.use(expressWinston.logger({
   level: global.Config.get('log:level'),
   baseMeta: {source: 'request', type: 'request'}
 }));
-
-if (!!global.Config.get('vault:token')){
-  global.Config.set('vault:unseal', true);
-};
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);

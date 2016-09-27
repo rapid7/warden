@@ -30,10 +30,6 @@ const makeServer = () => {
 
 describe('unseal API v1', () => {
 
-  it('global.Config does not have flag unseal', function () {
-    should(global.Config.get('vault:unseal')).not.exist;
-  });
-
   it('global.Config does not have a vault token', function () {
     should(global.Config.get('vault:token')).not.exist;
   });
