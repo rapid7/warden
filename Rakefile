@@ -70,7 +70,7 @@ task :package_dirs do
 end
 
 task :warden_source => [:install] do
-  ['bin/', 'lib/', 'node_modules/', 'LICENSE', 'package.json'].each do |src|
+  ['bin/', 'lib/', 'node_modules/', 'LICENSE', 'package.json', 'pkcs7/'].each do |src|
     cp_r ::File.join(base_dir, src), ::File.join(base_dir, install_dir)
   end
   cp ::File.join(base_dir, 'config', 'defaults.json'), ::File.join(base_dir, config_dir)
@@ -115,5 +115,6 @@ CLEAN.include "#{name}-*.tgz"
 CLEAN.include 'pkg/'
 CLEAN.include '**/.DS_Store'
 CLEAN.include 'node_modules/'
+CLEAN.include 'pkcs7/vendor/'
 
 task :default => [:clean, :package, :release]
