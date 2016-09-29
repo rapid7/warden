@@ -59,6 +59,14 @@ end
 package 'warden' do
   source resources('remote_file[warden]').path
   provider Chef::Provider::Package::Dpkg
+  notifies :run, "execute[chown Warden]"
+end
+
+## Chown the contents of the Warden directory to the Warden user/group
+execute "chown Warden" do
+  command "chown -R #{node['warden']['user']}:#{node['warden']['group']} #{node['warden']['paths']['directory']}"
+  user 'root'
+  action :nothing
 end
 
 ## Upstart Service
