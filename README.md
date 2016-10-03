@@ -55,17 +55,18 @@ Steps to release new version:
 
 To increment version, run:
 ~~~bash
-npm version minor
-rake
+$ npm version minor
+$ bundle exec rake default
 ~~~
+To be able to create a new release on [github.com], you must have the following environment variables set:
+* `GITHUB_CLIENT_ID`
+* `GITHUB_CLIENT_TOKEN`
 
-Then following the steps to create the release on [github.com]
+and the user and token must have the appropriate permissions in this repository.
 
 ## Configuration
 
 [Warden configuration can be found under the configuration section in the getting started guide.][gsg]
-
-
 
 [Node.js]: https://nodejs.org/en/
 [tokend]: https://github.com/rapid7/tokend
