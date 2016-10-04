@@ -11,7 +11,7 @@
     "test": "mocha",
     "cover": "rm -Rf coverage/* && istanbul cover _mocha -- -R spec",
     "lint": "eslint bin/* lib/*.js lib/**/*.js test/*.js",
-    "install": "cd pkcs7 && bundle package",
+    "install": "cd pkcs7 && bundle install --path='./'",
     "report": "coveralls < ./coverage/lcov.info"
   },
   "repository": {
