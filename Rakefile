@@ -160,6 +160,5 @@ CLEAN.include "#{name}-*.tgz"
 CLEAN.include 'pkg/'
 CLEAN.include '**/.DS_Store'
 CLEAN.include 'node_modules/'
-CLEAN.include 'pkcs7/vendor/'
 
 task :default => [:clean, :package, :release]

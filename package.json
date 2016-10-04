@@ -11,7 +11,7 @@
     "test": "mocha",
     "cover": "rm -Rf coverage/* && istanbul cover _mocha -- -R spec",
     "lint": "eslint bin/* lib/*.js lib/**/*.js test/*.js",
-    "install": "cd pkcs7 && bundle install --path='./'",
+    "install": "cd pkcs7 && bundle install --path='./vendor'",
     "report": "coveralls < ./coverage/lcov.info"
   },
   "repository": {
@@ -26,6 +26,7 @@
   "dependencies": {
     "aws-sdk": "^2.3.19",
     "body-parser": "^1.15.0",
+    "bundled-gem-spawn": "^1.0.1",
     "express": "^4.13.4",
     "express-winston": "^2.0.0",
     "nconf": "^0.8.4",

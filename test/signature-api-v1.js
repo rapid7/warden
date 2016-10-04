@@ -16,6 +16,7 @@ describe('Validate the Signature\'s contents v1', () => {
   const req = {};
   const res = {status() {return this}, json(any) {return any}};
   const next = function() {return true};
+  const bad_next = function() {return false};
 
   it('responds correctly to a properly formated request', function () {
     req.body = nothing_wrong;
@@ -25,6 +26,16 @@ describe('Validate the Signature\'s contents v1', () => {
                   valid: true
                 });
     should(signature.signatureValidate(req, res, next, server)).true;
+  });
+
+  it('responds correctly to a properly malformed request', function () {
+    req.body = bad_signature;
+    nock('http://localhost:9806')
+                .post('/validate')
+                .reply(FORBIDDEN, {
+                  valid: false
+                });
+    should(signature.signatureValidate(req, res, bad_next, server)).not.be.true;
   });
 
   nock.cleanAll();
