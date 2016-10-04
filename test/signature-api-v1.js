@@ -35,7 +35,7 @@ describe('Validate the Signature\'s contents v1', () => {
                 .reply(FORBIDDEN, {
                   valid: false
                 });
-    should(signature.signatureValidate(req, res, bad_next, server)).true;
+    should(signature.signatureValidate(req, res, bad_next, server)).not.be.true;
   });
 
   nock.cleanAll();
