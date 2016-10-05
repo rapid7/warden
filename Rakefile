@@ -104,6 +104,8 @@ end
 
 task :deb => [:chdir_pkg, :warden_source] do
   command = [
+    'bundle',
+    'exec',
     'fpm',
     '--deb-no-default-config-files',
     "--depends \"nodejs >= #{target_version}\"",
@@ -116,7 +118,7 @@ task :deb => [:chdir_pkg, :warden_source] do
     "-n \"#{name}\"",
     "-v #{version}",
     'opt/'
-    ].join(' ')
+  ].join(' ')
   sh command
 end
 
