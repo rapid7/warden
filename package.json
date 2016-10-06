@@ -1,6 +1,6 @@
 {
   "name": "warden",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "A gatekeeper for vault that verifies a server should have a vault token",
   "directories": {
     "doc": "docs",
