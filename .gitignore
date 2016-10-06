@@ -44,3 +44,8 @@ vendor/
 .idea/
 
 cookbook/metadata.json
+
+# Build artifacts
+*.tar.gz
+*.tgz
+npm-shrinkwrap.json
