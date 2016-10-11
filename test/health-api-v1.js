@@ -72,6 +72,7 @@ describe('Health API v1', () => {
       .end((err, res) => {
         res.body.should.have.properties('status');
         res.body.should.have.property('uptime');
+        res.body.should.have.property('unsealed');
         done();
       });
   });
