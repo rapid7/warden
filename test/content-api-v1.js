@@ -39,10 +39,10 @@ describe('Validate the Document\'s contents v1', () => {
   it('responds with the correct error for a document without a any of the criteria', function () {
     req.body = four_wrong;
     should(content.document(req, res, next)).have.property('errors',
-    [ 'AMI-ID parameter is not valid',
-      'Instance-ID parameter is not valid',
-      'Account-ID parameter is not valid',
-      'Region parameter is not valid' ]);
+      [ 'AMI-ID parameter is not valid',
+        'Instance-ID parameter is not valid',
+        'Account-ID parameter is not valid',
+        'Region parameter is not valid' ]);
   });
 
   it('responds correctly to a properly formated request', function () {
