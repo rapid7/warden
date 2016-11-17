@@ -5,7 +5,7 @@
   },
   "service": {
     "port": 8705,
-    "hostname": "localhost"
+    "hostname": "0.0.0.0"
   },
   "log": {
     "level": "info"
