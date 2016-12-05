@@ -12,8 +12,6 @@ class MyServlet < WEBrick::HTTPServlet::AbstractServlet
     )
     store = OpenSSL::X509::Store.new
 
-    puts ARGV[1]
-
     request.query
     body = JSON.parse(request.body, :symbolize_names => true)
     signature = OpenSSL::PKCS7.new(body[:signature])
