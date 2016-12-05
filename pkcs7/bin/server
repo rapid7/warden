@@ -12,7 +12,6 @@ class MyServlet < WEBrick::HTTPServlet::AbstractServlet
     )
     store = OpenSSL::X509::Store.new
 
-    request.query
     body = JSON.parse(request.body, :symbolize_names => true)
     signature = OpenSSL::PKCS7.new(body[:signature])
     valid = signature.verify([certificate], store, body[:data], OpenSSL::PKCS7::NOVERIFY)
