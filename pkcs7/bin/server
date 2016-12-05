@@ -2,26 +2,42 @@
 
 require 'json'
 require 'openssl'
-require 'sinatra'
-require 'sinatra/json'
+require 'webrick'
 
-certificate = OpenSSL::X509::Certificate.new(
-  IO.read(File.expand_path('../../resource/certificate.pem', __FILE__))
-)
-store = OpenSSL::X509::Store.new
+class MyServlet < WEBrick::HTTPServlet::AbstractServlet
+  def do_POST (request, response)
 
-post '/validate' do
-  request.body.rewind
-  parameters = JSON.parse(request.body.read, :symbolize_names => true)
+    certificate = OpenSSL::X509::Certificate.new(
+      IO.read(File.expand_path('../../resource/certificate.pem', __FILE__))
+    )
+    store = OpenSSL::X509::Store.new
 
-  signature = OpenSSL::PKCS7.new(parameters[:signature])
-  valid = signature.verify([certificate], store, parameters[:data], OpenSSL::PKCS7::NOVERIFY)
+    puts ARGV[1]
 
-  json :valid => valid,
-       :signers => (signature.signers.map do |signer|
-         {
-           :name => signer.name.to_s,
-           :signed_time => signer.signed_time.to_s
-         }
-       end)
+    request.query
+    body = JSON.parse(request.body, :symbolize_names => true)
+    signature = OpenSSL::PKCS7.new(body[:signature])
+    valid = signature.verify([certificate], store, body[:data], OpenSSL::PKCS7::NOVERIFY)
+
+    response.content_type = "application/json"
+    response.status = 200
+
+    response.body = {
+      :valid => valid,
+      :signers => (signature.signers.map do |signer|
+        {
+          :name => signer.name.to_s,
+          :signed_time => signer.signed_time.to_s
+        }
+      end)
+    }.to_json
+  end
 end
+
+server = WEBrick::HTTPServer.new(:Port => ARGV[1])
+server.mount "/validate", MyServlet
+trap("INT") {
+  server.shutdown
+}
+
+server.start
