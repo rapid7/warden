@@ -18,19 +18,22 @@ class MyServlet < WEBrick::HTTPServlet::AbstractServlet
 
     body = JSON.parse(request.body, :symbolize_names => true)
     signature = OpenSSL::PKCS7.new(body[:signature])
+
+    # The noverify is needed for when a certificate authority is not available.
+    # This is the case for Amazon.
     valid = signature.verify([@certificate], @store, body[:data], OpenSSL::PKCS7::NOVERIFY)
 
     response.content_type = "application/json"
     response.status = 200
+    autograph = (signature.signers.map do |signer| {
+        :name => signer.name.to_s,
+        :signed_time => signer.signed_time.to_s
+      }
+    end)
 
     response.body = {
       :valid => valid,
-      :signers => (signature.signers.map do |signer|
-        {
-          :name => signer.name.to_s,
-          :signed_time => signer.signed_time.to_s
-        }
-      end)
+      :signers => autograph
     }.to_json
   end
 end
