@@ -6,16 +6,19 @@ require 'webrick'
 
 class MyServlet < WEBrick::HTTPServlet::AbstractServlet
 
-  @@certificate = OpenSSL::X509::Certificate.new(
-    IO.read(File.expand_path('../../resource/certificate.pem', __FILE__))
-  )
-  @@store = OpenSSL::X509::Store.new
+  def initialize(*args)
+    super
+    @certificate = OpenSSL::X509::Certificate.new(
+      IO.read(File.expand_path('../../resource/certificate.pem', __FILE__))
+    )
+    @store = OpenSSL::X509::Store.new
+  end
 
   def do_POST (request, response)
 
     body = JSON.parse(request.body, :symbolize_names => true)
     signature = OpenSSL::PKCS7.new(body[:signature])
-    valid = signature.verify([@@certificate], @@store, body[:data], OpenSSL::PKCS7::NOVERIFY)
+    valid = signature.verify([@certificate], @store, body[:data], OpenSSL::PKCS7::NOVERIFY)
 
     response.content_type = "application/json"
     response.status = 200
