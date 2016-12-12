@@ -60,8 +60,8 @@ process.on('exit', function() {
   signatureServer.stop();
 });
 
-server.on('error', (err) => global.Log.error(err));
+server.on('error', (err) => global.Log.log('error', err));
 
 server.listen(port, host, () => {
-  Log.info(`Listening on ${host}:${port}`);
+  Log.log('info', `Listening on ${host}:${port}`);
 });
