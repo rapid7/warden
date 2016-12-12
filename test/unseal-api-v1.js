@@ -3,6 +3,9 @@
 
 global.Config = require('nconf')
 global.Config.use('memory');
+global.Log = {
+  log: () => { }
+}
 
 const request = require('supertest');
 const expect = require('expect')
