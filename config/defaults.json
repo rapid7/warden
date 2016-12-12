@@ -1,7 +1,9 @@
 {
   "vault": {
     "port": 8200,
-    "hostname": "localhost"
+    "hostname": "localhost",
+    "renewable": true,
+    "ttl": "5m"
   },
   "service": {
     "port": 8705,
