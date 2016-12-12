@@ -16,9 +16,10 @@ const unseal = require('../lib/control/v1/unseal');
 const testServerPort = 3000;
 const HTTP_OK = 200;
 const HTTP_METHOD_NOT_ALLOWED = 405;
-const ERROR = 500;
+const HTTP_BAD_REQUEST = 400;
 
 const good = {token: '12345678-abcd-1234-!@#$-123456789abc'};
+const bad = 'thisisabadbitofposteddata';
 const res = {status() {return this}, json(any) {return any}};
 const next = function() {return true};
 
@@ -57,7 +58,8 @@ describe('unseal API v1', () => {
   it('responds to a malformed request to the /unseal endpoint', (done) => {
     request(server)
       .post('/v1/unseal')
-      .expect(ERROR)
+      .send(bad)
+      .expect(HTTP_BAD_REQUEST)
       .end(done);
   });
 
