@@ -3,8 +3,7 @@
     "port": 8200,
     "hostname": "localhost",
     "renewable": true,
-    "ttl": 300,
-    "explicit_max_ttl": 7200
+    "ttl": 300
   },
   "service": {
     "port": 8705,
