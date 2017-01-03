@@ -9,10 +9,10 @@ const vaultRequest = require('../lib/control/util').vaultRequest;
 
 const vault = {
   port: 8200,
-  hostname: "localhost",
+  hostname: 'localhost',
   renewable: true,
-  ttl: "300s",
-  token: "kali"
+  ttl: '300s',
+  token: 'kali'
 };
 
 nock(`http://${vault.hostname}:${vault.port}`)
