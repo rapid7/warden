@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 'use strict';
 
 global.Config = require('nconf')

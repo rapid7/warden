@@ -1,4 +1,3 @@
-/* eslint-env mocha */
 'use strict';
 
 const should = require('should');
@@ -29,7 +28,7 @@ const accessorResponse = {
   }
 };
 
-const badResponse = JSON.stringify({"code":400,"status":"BAD_REQUEST","errors":"connect ECONNREFUSED 127.0.0.1:8200"});
+const badResponse = JSON.stringify({code: 400, status :'BAD_REQUEST', errors: 'connect ECONNREFUSED 127.0.0.1:8200'});
 
 const req = {};
 const res = {
