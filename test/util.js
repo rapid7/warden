@@ -15,13 +15,15 @@ const vault = {
   token: 'kali'
 };
 
-nock(`http://${vault.hostname}:${vault.port}`)
-  .post('/v1/valid/endpoint')
-  .reply(200, {valid: true})
-  .post('/v1/valid/endpoint/with/bad/data')
-  .reply(200, '{not valid json');
-
 describe('Util#send', function() {
+  beforeEach(function() {
+    nock(`http://${vault.hostname}:${vault.port}`)
+      .post('/v1/valid/endpoint')
+      .reply(200, {valid: true})
+      .post('/v1/valid/endpoint/with/bad/data')
+      .reply(200, '{not valid json');
+  });
+
   it('sends an http request to the specified endpoint and returns a promise', function() {
     return vaultRequest(vault, '/v1/auth/token/create', 'POST').should.be.Promise();
   });

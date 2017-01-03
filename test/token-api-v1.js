@@ -42,7 +42,7 @@ const res = {
 const next = () => {return true};
 const vault = {port: PORT, hostname: 'localhost', token: '3e5f8293-eb83-37be-2ed3-03e4324c5e53'};
 
-describe.only('Validate getting a token from vault', () => {
+describe('Validate getting a token from vault', () => {
   beforeEach(function() {
     nock('http://localhost:8200')
       .post('/v1/auth/token/create')
