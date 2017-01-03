@@ -81,6 +81,34 @@ describe('Validate getting a token from vault', () => {
     });
   });
 
+  it('returns an error if the `auth` object is not included in the Vault response', function() {
+    nock.cleanAll();
+    nock('http://localhost:8200')
+      .post('/v1/auth/token/create')
+      .reply(HTTP_OK, {});
+
+    req.body = valid;
+    req.document = JSON.parse(valid.document);
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Token Error'});
+
+    return token.create(req, res, next, vault).should.eventually.eql(resp);
+  });
+
+  it('returns an error if explicit_max_ttl is not set or is negative', function() {
+    nock.cleanAll();
+    nock('http://localhost:8200')
+      .post('/v1/auth/token/create')
+      .reply(HTTP_OK, goodResponse)
+      .post('/v1/auth/token/lookup-accessor/UUID')
+      .reply(HTTP_OK, {data: {accessor: 'UUID', creation_time: Date.now()}});
+
+    req.body = valid;
+    req.document = JSON.parse(valid.document);
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Invalid time value'});
+
+    return token.create(req, res, next, vault).should.eventually.eql(resp);
+  });
+
   it('returns an error if one is encountered', function() {
     nock.cleanAll();
     req.body = valid;
