@@ -13,17 +13,17 @@ class ConfigLike {
   }
 }
 
-describe('Logging', () => {
+describe('Logging', function() {
   const config = new ConfigLike({
     'log:level': 'info'
   });
   const log = require('../lib/logger').attach(config.get('log:level'));
 
-  it('returns a WINSTON object', () => {
+  it('returns a WINSTON object', function() {
     log.should.be.an.instanceOf(Winston.Logger);
   });
 
-  it('sets the log level correctly', () => {
+  it('sets the log level correctly', function() {
     log.level.should.be.exactly('info');
   });
 });

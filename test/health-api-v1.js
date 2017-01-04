@@ -8,10 +8,6 @@ const testServerPort = 3000;
 const HTTP_OK = 200;
 const HTTP_METHOD_NOT_ALLOWED = 405;
 
-const endpoints = {
-  health: '/v1/health'
-};
-
 /**
  * Create a new Express server for testing
  *
@@ -21,21 +17,22 @@ const makeServer = () => {
   const app = require('express')();
 
   require('../lib/control/v1/health').attach(app);
+
   return app.listen(testServerPort);
 };
 
-describe('Health API v1', () => {
+describe('Health API v1', function() {
   let server = null;
 
-  beforeEach(() => {
+  beforeEach(function() {
     server = makeServer();
   });
 
-  afterEach((done) => {
+  afterEach(function(done) {
     server.close(done);
   });
 
-  it('acknowledges GET requests to the /v1/health endpoint', (done) => {
+  it('acknowledges GET requests to the /v1/health endpoint', function(done) {
     request(server)
       .get('/v1/health')
       .set('Accept', 'application/json')
@@ -44,7 +41,7 @@ describe('Health API v1', () => {
       .end(done);
   });
 
-  it('rejects all other request types to the /v1/health endpoint', (done) => {
+  it('rejects all other request types to the /v1/health endpoint', function(done) {
     request(server)
       .delete('/v1/health')
       .expect('Allow', 'GET')
@@ -62,7 +59,7 @@ describe('Health API v1', () => {
       .end(done);
   });
 
-  it('responds correctly to a request to the /health endpoint', (done) => {
+  it('responds correctly to a request to the /health endpoint', function(done) {
     request(server)
       .get('/v1/health')
       .set('Accept', 'application/json')
@@ -75,5 +72,4 @@ describe('Health API v1', () => {
         done();
       });
   });
-
 });
