@@ -24,16 +24,31 @@ describe('Validate the Signature\'s contents v1', function() {
                 .reply(HTTP_OK, {
                   valid: true
                 });
-    should(signature.signatureValidate(req, res, () => true, server)).eventually.be.true();
+
+    return signature.signatureValidate(req, res, () => true, server).should.eventually.be.true();
   });
 
-  it('responds correctly to a properly malformed request', function() {
+  it('returns a 400 error if the request is good but the response is invalid', function() {
+    req.body = consts.nothing_wrong;
+    nock('http://localhost:9806')
+        .post('/validate')
+        .reply(HTTP_OK, {
+          valid: false
+        });
+
+    return signature.signatureValidate(req, res, () => true, server).should.eventually.eql({
+      code: 400,
+      status: 'BAD_REQUEST',
+      errors: 'Signature is not valid'
+    });
+  });
+
+  it('rejects if the response is an Error', function() {
     req.body = consts.bad_signature;
     nock('http://localhost:9806')
                 .post('/validate')
-                .reply(FORBIDDEN, {
-                  valid: false
-                });
-    should(signature.signatureValidate(req, res, () => false, server)).eventually.not.be.true();
+                .replyWithError('Malformed request');
+
+    return signature.signatureValidate(req, res, (err) => {throw err;}, server).should.be.rejectedWith(Error);
   });
 });
