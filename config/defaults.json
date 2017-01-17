@@ -2,8 +2,11 @@
   "vault": {
     "port": 8200,
     "hostname": "localhost",
-    "renewable": true,
-    "ttl": 300
+    "tokenParams": {
+      "renewable": true,
+      "ttl": 300,
+      "no_parent": true
+    }
   },
   "service": {
     "port": 8705,
