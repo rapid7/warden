@@ -32,7 +32,9 @@ This is the default configuration, which you can find in /config/defaults.json.
     "hostname": "localhost"
   },
   "log": {
-    "level": "info"
+    "level": "INFO",
+    "json": true,
+    "requests": true
   }
 }
 ~~~
@@ -53,7 +55,7 @@ This file has a token added to the Vault object that can be used instead of send
     "hostname": "localhost"
   },
   "log": {
-    "level": "info"
+    "level": "INFO"
   }
 }
 ~~~
@@ -78,10 +80,14 @@ This file has a token added to the Vault object that can be used instead of send
 
   The following keys are available:
 
-  * `level` - The level to log at. Valid values are "debug", "verbose", "info",
-    "warn", and "error". Each log level encompasses all the ones below it. So
+  * `level` - The level to log at. Valid values are "SILLY", "DEBUG", "VERBOSE", "INFO",
+    "WARN", and "ERROR". Each log level encompasses all the ones below it. So
     "debug" is the most verbose and "error" is the least verbose. Defaults to
-    "info".
+    "INFO".
+
+  * `json` - Boolean flag indicating if the logs should be output in JSON format. Defaults to `true`.
+
+  * `requests` - Boolean flag indicating if Express requests should be logged. Defaults to `true`.
 
 * `service` - These settings configure how Warden is set up.
 

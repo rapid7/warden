@@ -15,7 +15,7 @@ class ConfigLike {
 
 describe('Logging', function() {
   const config = new ConfigLike({
-    'log:level': 'info'
+    'log:level': 'INFO'
   });
   const log = require('../lib/logger').attach(config.get('log:level'));
 
@@ -24,6 +24,6 @@ describe('Logging', function() {
   });
 
   it('sets the log level correctly', function() {
-    log.level.should.be.exactly('info');
+    log.level.should.be.exactly('INFO');
   });
 });
