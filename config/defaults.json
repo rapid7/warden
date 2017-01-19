@@ -13,6 +13,8 @@
     "hostname": "0.0.0.0"
   },
   "log": {
-    "level": "info"
+    "level": "INFO",
+    "json": true,
+    "requests": true
   }
 }

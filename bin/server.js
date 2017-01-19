@@ -14,7 +14,6 @@ const args = require('yargs')
   .argv;
 
 const express = require('express');
-const expressWinston = require('express-winston');
 const http = require('http');
 const Path = require('path');
 const Logger = require('../lib/logger');
@@ -37,12 +36,10 @@ global.Config.use('memory');
 // Set up logging
 global.Log = Logger.attach(global.Config.get('log:level'));
 
-app.use(expressWinston.logger({
-  winstonInstance: global.Log,
-  expressFormat: true,
-  level: global.Config.get('log:level'),
-  baseMeta: {source: 'request', type: 'request'}
-}));
+// Add request logging middleware
+if (Config.get('log:requests')) {
+  app.use(Logger.requests(Log, Config.get('log:level')));
+}
 
 // Register endpoints
 require('../lib/control/v1/health').attach(app);
@@ -61,9 +58,9 @@ process.on('exit', function() {
 });
 
 server.on('error', (err) => {
-  global.Log.log('error', err);
+  global.Log.log('ERROR', err);
 });
 
 server.listen(port, host, () => {
-  Log.log('info', `Listening on ${host}:${port}`);
+  Log.log('INFO', `Listening on ${host}:${port}`);
 });
