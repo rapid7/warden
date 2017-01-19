@@ -27,7 +27,7 @@ const accessorResponse = {
   }
 };
 
-const badResponse = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'connect ECONNREFUSED 127.0.0.1:8200'});
+const badResponse = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: ['connect ECONNREFUSED 127.0.0.1:8200']});
 
 const req = {};
 const res = {
@@ -91,7 +91,7 @@ describe('Validate getting a token from vault', function() {
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
-    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Token Error'});
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: ['Token Error']});
 
     return token.create(req, res, next, vault).should.eventually.eql(resp);
   });
@@ -106,7 +106,7 @@ describe('Validate getting a token from vault', function() {
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
-    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Invalid time value'});
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: ['Invalid time value']});
 
     return token.create(req, res, next, vault).should.eventually.eql(resp);
   });
@@ -121,7 +121,7 @@ describe('Validate getting a token from vault', function() {
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
-    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Token has already expired'});
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: ['Token has already expired']});
 
     return token.create(req, res, next, vault).should.eventually.eql(resp);
   });
@@ -138,7 +138,7 @@ describe('Validate getting a token from vault', function() {
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
-    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: 'Token has already expired'});
+    const resp = JSON.stringify({code: 400, status: 'BAD_REQUEST', errors: ['Token has already expired']});
 
     return token.create(req, res, next, vault).should.eventually.eql(resp);
   });

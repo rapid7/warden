@@ -39,7 +39,7 @@ describe('Validate the Signature\'s contents v1', function() {
     return signature.signatureValidate(req, res, () => true, server).should.eventually.eql({
       code: 400,
       status: 'BAD_REQUEST',
-      errors: 'Signature is not valid'
+      errors: ['Signature is not valid']
     });
   });
 
