@@ -20,10 +20,10 @@ describe('Validate the Signature\'s contents v1', function() {
   it('responds correctly to a properly formatted request', function() {
     req.body = consts.nothing_wrong;
     nock('http://localhost:9806')
-                .post('/validate')
-                .reply(HTTP_OK, {
-                  valid: true
-                });
+      .post('/validate')
+      .reply(HTTP_OK, {
+        valid: true
+      });
 
     return signature.signatureValidate(req, res, () => true, server).should.eventually.be.true();
   });
@@ -31,10 +31,10 @@ describe('Validate the Signature\'s contents v1', function() {
   it('returns a 400 error if the request is good but the response is invalid', function() {
     req.body = consts.nothing_wrong;
     nock('http://localhost:9806')
-        .post('/validate')
-        .reply(HTTP_OK, {
-          valid: false
-        });
+      .post('/validate')
+      .reply(HTTP_OK, {
+        valid: false
+      });
 
     return signature.signatureValidate(req, res, () => true, server).should.eventually.eql({
       code: 400,
@@ -46,8 +46,8 @@ describe('Validate the Signature\'s contents v1', function() {
   it('rejects if the response is an Error', function() {
     req.body = consts.bad_signature;
     nock('http://localhost:9806')
-                .post('/validate')
-                .replyWithError('Malformed request');
+      .post('/validate')
+      .replyWithError('Malformed request');
 
     return signature.signatureValidate(req, res, (err) => {throw err;}, server).should.be.rejectedWith(Error);
   });

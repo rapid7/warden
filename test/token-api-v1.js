@@ -114,10 +114,10 @@ describe('Validate getting a token from vault', function() {
   it('returns an error if explicit_max_ttl is negative', function() {
     nock.cleanAll();
     nock('http://localhost:8200')
-        .post('/v1/auth/token/create')
-        .reply(HTTP_OK, goodResponse)
-        .post('/v1/auth/token/lookup-accessor/UUID')
-        .reply(HTTP_OK, {data: {accessor: 'UUID', creation_time: Date.now(), explicit_max_ttl: -5}});
+      .post('/v1/auth/token/create')
+      .reply(HTTP_OK, goodResponse)
+      .post('/v1/auth/token/lookup-accessor/UUID')
+      .reply(HTTP_OK, {data: {accessor: 'UUID', creation_time: Date.now(), explicit_max_ttl: -5}});
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
@@ -129,12 +129,12 @@ describe('Validate getting a token from vault', function() {
   it('returns an error if explicit_max_ttl is 0', function() {
     nock.cleanAll();
     nock('http://localhost:8200')
-        .post('/v1/auth/token/create')
-        .reply(HTTP_OK, goodResponse)
-        .post('/v1/auth/token/lookup-accessor/UUID')
-        .reply(HTTP_OK, {data: {accessor: 'UUID', creation_time: Date.now(), explicit_max_ttl: 0}})
-        .get('/v1/sys/mounts/auth/token/tune')
-        .reply(HTTP_OK, {max_lease_ttl: 0});
+      .post('/v1/auth/token/create')
+      .reply(HTTP_OK, goodResponse)
+      .post('/v1/auth/token/lookup-accessor/UUID')
+      .reply(HTTP_OK, {data: {accessor: 'UUID', creation_time: Date.now(), explicit_max_ttl: 0}})
+      .get('/v1/sys/mounts/auth/token/tune')
+      .reply(HTTP_OK, {max_lease_ttl: 0});
 
     req.body = valid;
     req.document = JSON.parse(valid.document);
