@@ -7,6 +7,6 @@ cookbook.depends 'warden' do |warden|
   warden.path './cookbook'
 end
 
-profile :default do |test|
-  test.chef.run_list 'warden::default'
+profile :default do |default|
+  default.chef.run_list ['warden::nodejs', 'warden::default']
 end
