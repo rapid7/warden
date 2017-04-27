@@ -22,14 +22,6 @@ user node['warden']['user'] do
   home node['warden']['paths']['directory']
 end
 
-directory node['warden']['paths']['directory'] do
-  owner node['warden']['user']
-  group node['warden']['group']
-  mode '0755'
-
-  recursive true
-end
-
 ## Fetch and install warden
 remote_file 'warden' do
   source Warden::Helpers.github_download('rapid7', 'warden', node['warden']['version'])
@@ -46,9 +38,6 @@ end
 
 ## Upstart Service
 template '/etc/init/warden.conf' do
-  owner node['warden']['user']
-  group node['warden']['group']
-
   source 'upstart.conf.erb'
   variables(
     :description => 'warden configuration service',
@@ -64,9 +53,6 @@ end
 
 directory 'warden-configuration-directory' do
   path ::File.dirname(node['warden']['paths']['configuration'])
-
-  owner node['warden']['user']
-  group node['warden']['group']
   mode '0755'
 
   recursive true
@@ -75,9 +61,6 @@ end
 template 'warden-configuration' do
   path node['warden']['paths']['configuration']
   source 'json.erb'
-
-  owner node['warden']['user']
-  group node['warden']['group']
 
   variables(:properties => node['warden']['config'])
 
