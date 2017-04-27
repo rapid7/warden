@@ -58,6 +58,8 @@ template '/etc/init/warden.conf' do
       "-c #{node['warden']['paths']['configuration']}"
     ]
   )
+
+  notifies :restart, 'service[warden]' if node['warden']['enable']
 end
 
 directory 'warden-configuration-directory' do
@@ -78,11 +80,11 @@ template 'warden-configuration' do
   group node['warden']['group']
 
   variables(:properties => node['warden']['config'])
+
+  notifies :restart, 'service[warden]' if node['warden']['enable']
 end
 
 service 'warden' do
-  ## The wrapping cookbook must call `action` on this resource to start/enable
-  action :nothing
-
+  action node['warden']['enable'] ? [:start, :enable] : [:stop, :disable]
   provider Chef::Provider::Service::Upstart
 end
