@@ -2,28 +2,11 @@
 # Cookbook Name:: warden
 # Recipe:: default
 #
-# Copyright (C) 2016 Rapid7 LLC.
+# Copyright (C) 2017 Rapid7 LLC.
 #
 # Distributed under terms of the MIT License. All rights not explicitly granted
 # in the MIT license are reserved. See the included LICENSE file for more details.
 #
-
-#######################
-## Install NodeJS 4.x
-#
-# This should be moved into a shared cookbook
-##
-include_recipe 'apt::default'
-
-apt_repository 'nodejs-4x' do
-  uri 'https://deb.nodesource.com/node_4.x'
-  distribution node['lsb']['codename']
-  components ['main']
-  key 'https://deb.nodesource.com/gpgkey/nodesource.gpg.key'
-end
-
-package 'nodejs'
-#######################
 
 node.default['warden']['version'] = cookbook_version
 
@@ -37,14 +20,6 @@ user node['warden']['user'] do
 
   gid node['warden']['group']
   home node['warden']['paths']['directory']
-end
-
-directory node['warden']['paths']['directory'] do
-  owner node['warden']['user']
-  group node['warden']['group']
-  mode '0755'
-
-  recursive true
 end
 
 ## Fetch and install warden
@@ -63,9 +38,6 @@ end
 
 ## Upstart Service
 template '/etc/init/warden.conf' do
-  owner node['warden']['user']
-  group node['warden']['group']
-
   source 'upstart.conf.erb'
   variables(
     :description => 'warden configuration service',
@@ -75,13 +47,12 @@ template '/etc/init/warden.conf' do
       "-c #{node['warden']['paths']['configuration']}"
     ]
   )
+
+  notifies :restart, 'service[warden]' if node['warden']['enable']
 end
 
 directory 'warden-configuration-directory' do
   path ::File.dirname(node['warden']['paths']['configuration'])
-
-  owner node['warden']['user']
-  group node['warden']['group']
   mode '0755'
 
   recursive true
@@ -91,15 +62,12 @@ template 'warden-configuration' do
   path node['warden']['paths']['configuration']
   source 'json.erb'
 
-  owner node['warden']['user']
-  group node['warden']['group']
-
   variables(:properties => node['warden']['config'])
+
+  notifies :restart, 'service[warden]' if node['warden']['enable']
 end
 
 service 'warden' do
-  ## The wrapping cookbook must call `action` on this resource to start/enable
-  action :nothing
-
+  action node['warden']['enable'] ? [:start, :enable] : [:stop, :disable]
   provider Chef::Provider::Service::Upstart
 end
