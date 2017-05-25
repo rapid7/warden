@@ -34,6 +34,7 @@ end
 package 'warden' do
   source resources('remote_file[warden]').path
   provider Chef::Provider::Package::Dpkg
+  version node['warden']['version']
 end
 
 ## Upstart Service
