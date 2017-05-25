@@ -31,10 +31,21 @@ remote_file 'warden' do
   backup false
 end
 
+version_dir = "#{ node['warden']['paths']['directory'] }-#{ node['warden']['version'] }"
+
 package 'warden' do
   source resources('remote_file[warden]').path
   provider Chef::Provider::Package::Dpkg
   version node['warden']['version']
+
+  notifies :create, "link[#{node['warden']['paths']['directory']}]", :immediately
+end
+
+link node['warden']['paths']['directory'] do
+  to version_dir
+
+  action :nothing
+  notifies :restart, 'service[warden]' if node['warden']['enable']
 end
 
 ## Upstart Service
