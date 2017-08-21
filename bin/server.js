@@ -10,6 +10,11 @@ const args = require('yargs')
     describe: 'Load configuration from file',
     type: 'string'
   })
+  .option('colorize', {
+    describe: 'Colorize log output',
+    type: 'boolean',
+    default: false
+  })
   .help('help')
   .argv;
 
